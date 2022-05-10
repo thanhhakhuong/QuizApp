@@ -71,7 +71,7 @@ nav ul li a:hover{
 .progress-bar {
     fill:#eee;
     border-radius: 5px;
-    width: 200px;
+    width: 280px;
     height: 25px;
 }
 
@@ -82,7 +82,7 @@ rect.right.progress-bar{
 
 rect.wrong.progress-bar{
     fill: #FF7974;
-    width: 40px;
+    width: 80px;
 }
 
 .wrapper {
@@ -93,6 +93,27 @@ rect.wrong.progress-bar{
     margin-bottom: 10px;
 }
 
+
+#question {
+    line-height: 2.5;
+}
+
+.wrapper#task {
+    min-height: 100px;
+}
+
+button {
+    background-color: #fff;
+    padding: 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    border: #333 solid 1px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 80%;
+}
 
 @media screen and (max-width: 800px) {
 	div.container {
