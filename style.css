@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body {
+    height: 100%;
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+header, footer {
+    text-align: center;
+}
+
+header {
+    background-color: #FFD1DA;
+    margin-top: 15px;
+}
+
+nav {
+    background-color: #C3EDBF;
+    order: 1;
+    flex: 1 1 0;
+}
+
+main {
+    background-color: #fff1cd;
+    order: 2;
+    flex: 3 3 0;
+    min-height: 400px;
+}
+
+aside {
+    background-color: #beebf2;
+    order: 3;
+    flex: 1 1 0;
+}
+
+footer {
+    margin-bottom: 15px;
+    background-color: #d5cdeb;
+}
+
+
+nav ul {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+nav ul li a:hover{
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.m-5 {
+    margin: 5px;
+}
+
+.rounded-border {
+    border-radius: 10px;
+    padding: 20px;
+    margin: 5px;
+}
+
+.container {
+    display: flex;
+}
+
+.progress-bar {
+    fill:#eee;
+    border-radius: 5px;
+    width: 200px;
+    height: 25px;
+}
+
+rect.right.progress-bar{
+    fill: #C3EDBF;
+    width: 40px;
+}
+
+rect.wrong.progress-bar{
+    fill: #FF7974;
+    width: 40px;
+}
+
+.wrapper {
+    border-radius: 5px;
+    border: solid white 2px;
+    padding: 10px;
+    margin: 5px;
+    margin-bottom: 10px;
+}
+
+
+@media screen and (max-width: 800px) {
+	div.container {
+		flex-direction: column;
+	}
+}
