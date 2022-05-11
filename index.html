@@ -16,50 +16,41 @@
 </head>
 <body>
 
-    <header class="text-center rounded-border"> 
+    <header class="rounded-border text-center"> 
         Lernprogramm 
     </header>
     
     <div class="container">
 
         <nav class="rounded-border">
-            <ul id="navi">
-                <li><a href="index.html" title="Zurück zur Startseite">Home</a></li>
-                <li><a href="#" title="Neuigkeit">Neuigkeit</a></li>
-                <li><a href="#" title="Kontakt">Kontakt</a></li>
-            </ul>
+            <h2>Category</h2>
+            <input type="radio" name="category" value="allgemein" checked>
+            <label for="allgemein">Allgemein</label><br>
+            <input type="radio" name="category" value="internettechnologien">
+            <label for="internettechnologien">Internettechnologien</label><br>
+            <input type="radio" name="category" value="mathe">
+            <label for="mathek">Mathematik</label><br>
+            <input type="radio" name="category" value="noten">
+            <label for="noten">Noten</label>
         </nav>
 
-        <aside class="rounded-border"> Online </aside>
+        <aside class="rounded-border">             
+            <h2>Statistik</h2>
+        </aside>
 
         <main class="rounded-border">
+
             <div class="wrapper" id="progress">
                 Lernfortschritt <br>
-                <svg width="600" height="35">
+                <svg width="100%" height="35">
                     <rect class="progress-bar" x="0" y="5"/>
-                    <rect class="progress-bar right" x="0" y="5"/>
-                    <rect class="progress-bar" x="300" y="5"/>
-                    <rect class="progress-bar wrong" x="300" y="5"/>
                 </svg>
                 <span class="grade"></span>
             </div>
 
-            <div class="wrapper" id="category">
-                <input type="radio" name="category" value="allgemein" checked>
-                <label for="allgemein">Allgemein</label>
-                <input type="radio" name="category" value="internettechnologien">
-                <label for="internettechnologien">Internettechnologien</label>
-                <input type="radio" name="category" value="mathematik">
-                <label for="mathematik">Mathematik</label>
-            </div>
-            
-            <!--             
-            <div id="boo">Das ist ein Element, in das eine Formel eingesetzt wird</div>
-            <div id="boo2">Das ist ein Element mit Inline-Formel: $c = \pm\sqrt{a^2 + b^2}$. Rendern als separates Element sieht so aus: $$a' = \begin{pmatrix} a & b \\c & d\end{pmatrix} $$ usw.</div> 
-            -->
 
-            <div class="wrapper" id="task">
-                <div id="question">Frage?</div>
+            <div class="wrapper text-center" id="task">
+                <p id="question">Frage?</p>
                 <div id="answers">
                     <button id="answer-1">A</button>
                     <button id="answer-2">B</button>
@@ -67,10 +58,11 @@
                     <button id="answer-4">D</button>
                 </div>
             </div>
+
         </main>
     </div>
 
-    <footer class="text-center rounded-border">
+    <footer class="rounded-border text-center ">
         Viel Spaß beim Lernen!
     </footer>
 

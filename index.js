@@ -20,6 +20,8 @@ let data = {
 let currentSet;
 let category;
 let right, wrong, total;
+const GREEN = "#C3EDBF";
+const RED = "#FF6961";
 
 window.addEventListener('DOMContentLoaded', (event) => {
     console.log('DOM fully loaded and parsed');
@@ -33,19 +35,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 class Model {
-    getCategorySet() {
+    
+    getTask() {
+        let category = "teil-internettechnologien";
         var radios = document.getElementsByName('category');
         radios.forEach(radio => radio.addEventListener(
             'change', () => {
                 category = "teil-" + radio.value;
-                console.log(category);
-                return category;
+                console.log("Model -> getTask: " + category);
+                let currentTask = data[category][0];
+                let questionElement = document.getElementById("question");
+                questionElement.innerHTML = currentTask["a"];
+                let answersElement = document.querySelectorAll("#answers > button");
+                for (let i = 0; i < 4; i++) {
+                    answersElement[i].innerHTML = currentTask["l"][i];
+            }
         }))
-        return "teil-allgemein";
-    }
-    getTask() {
-        let category = this.getCategorySet();
-        return data[category][0];
+        return data;
     }
 }
 
@@ -56,14 +62,9 @@ class Presenter {
     }
 
     start() {
-        let currentTask = m.getTask();
-        console.log(currentTask);
-        let questionElement = document.getElementById("question");
-        questionElement.innerHTML = currentTask["a"];
-        let answersElement = document.querySelectorAll("#answers > button");
-        for (let i = 0; i < 4; i++) {
-            answersElement[i].innerHTML = currentTask["l"][i];
-        }
+        console.log("Presenter -> start");
+        v.setHandler();
+        m.getTask();
     }
 
     evaluate(answer) {
@@ -79,18 +80,35 @@ class View {
     }
 
     setHandler() {
-        document.getElementById("answer-1").addEventListener("click", this.evaluate.bind(this))
+
+        document.getElementById("answer-1").addEventListener("click", this.evaluate.bind(this));
+
+        document.getElementById("answer-1").addEventListener("mousedown", this.colorOn.bind(this));
+        document.getElementById("answer-1").addEventListener("mouseup", this.colorOff.bind(this));
+        document.getElementById("answer-2").addEventListener("mousedown", this.colorOn.bind(this));
+        document.getElementById("answer-3").addEventListener("mousedown", this.colorOn.bind(this));
+        document.getElementById("answer-4").addEventListener("mousedown", this.colorOn.bind(this));
+
+        document.getElementById("answer-1").addEventListener("click", this.colorOff.bind(this));
     }
 
     selectCategory(event) {
-
+        
     }
 
     evaluate(event) {
-
+        console.log("View -> Evaluate: " + event.type + " " + event.target.nodeName);
+        console.log(event);
     }
 
     colorOn(event) {
+        if (event.target.nodeName.toLowerCase() === "button") {
+            this.color = event.target.style.backgroundColor;
+            console.log("colorOn: " + event.type + " Color: " + this.color);
+            if (event.target.id == "answer-1") {
+                event.target.style.backgroundColor = GREEN;
+            } else event.target.style.backgroundColor = RED;
+        }
 
     }
 

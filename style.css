@@ -1,12 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 body {
     height: 100%;
-    background-color: white;
     font-family: 'Poppins', sans-serif;
-}
-
-header, footer {
-    text-align: center;
 }
 
 header {
@@ -24,7 +19,7 @@ main {
     background-color: #fff1cd;
     order: 2;
     flex: 3 3 0;
-    min-height: 400px;
+    height: 400px;
 }
 
 aside {
@@ -36,22 +31,6 @@ aside {
 footer {
     margin-bottom: 15px;
     background-color: #d5cdeb;
-}
-
-
-nav ul {
-    list-style-type: none;
-    padding-left: 10px;
-}
-
-nav ul li a {
-    color: #333;
-    text-decoration: none;
-}
-
-nav ul li a:hover{
-    opacity: 0.8;
-    text-decoration: underline;
 }
 
 .m-5 {
@@ -66,16 +45,17 @@ nav ul li a:hover{
 
 .container {
     display: flex;
+    height: 100%;
 }
 
 .progress-bar {
     fill:#eee;
     border-radius: 5px;
-    width: 280px;
+    width: 100%;
     height: 25px;
 }
 
-rect.right.progress-bar{
+/* rect.right.progress-bar{
     fill: #C3EDBF;
     width: 40px;
 }
@@ -83,7 +63,7 @@ rect.right.progress-bar{
 rect.wrong.progress-bar{
     fill: #FF7974;
     width: 80px;
-}
+} */
 
 .wrapper {
     border-radius: 5px;
@@ -93,26 +73,30 @@ rect.wrong.progress-bar{
     margin-bottom: 10px;
 }
 
-
-#question {
-    line-height: 2.5;
+.text-center {
+    text-align: center;
 }
 
-.wrapper#task {
-    min-height: 100px;
+#question {
+    font-size: 2rem;
+}
+
+div#task {
+    height: 270px;
 }
 
 button {
-    background-color: #fff;
+    background-color: white;
     padding: 10px;
-    margin-right: 5px;
+    margin: 5px;
     border-radius: 3px;
-    border: #333 solid 1px;
+    border: black solid 2px;
     cursor: pointer;
 }
 
 button:hover {
-    opacity: 80%;
+    background-color: black;
+    color: white;
 }
 
 @media screen and (max-width: 800px) {
