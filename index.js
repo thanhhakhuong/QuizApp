@@ -19,7 +19,7 @@ let data = {
 }
 let currentSet;
 let category;
-let right, wrong, total;
+let right = wrong = total = 0;
 const GREEN = "#C3EDBF";
 const RED = "#FF6961";
 
@@ -32,6 +32,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     p.setModelAndView(m, v);
     // setTimeout(p.start, 2000);
     p.start();
+    p.evaluate();
 });
 
 class Model {
@@ -53,6 +54,16 @@ class Model {
         }))
         return data;
     }
+
+    restart() {
+        let button = document.getElementById("restart");
+        button.addEventListener("click", () => {
+            right = 0;
+            wrong = 0;
+            total = 0;
+            console.log("Right: " + right + " - Wrong: " + wrong + " - Total: " + total);
+        })
+    }
 }
 
 class Presenter {
@@ -65,10 +76,30 @@ class Presenter {
         console.log("Presenter -> start");
         v.setHandler();
         m.getTask();
+        m.restart();
     }
 
-    evaluate(answer) {
-        console.log("Presenter -> Answer: " + answer);
+    evaluate() {
+        var buttons = document.querySelectorAll('#answers > button');
+        buttons.forEach(button => {
+            button.addEventListener("click", (event) => {
+                console.log("Presenter -> Evaluate: " + event.type + " " + event.target.nodeName);
+                if (event.target.id == "answer-1") {
+                    right++;
+                } else wrong++;
+                total = total + 1;
+                console.log("Right: " + right + " - Wrong: " + wrong + " - Total: " + total);
+                v.evaluate();
+            })
+        })
+    }
+
+    restart() {
+        let button = document.getElementById("restart");
+        button.addEventListener("click", () => {
+            m.restart();
+            p.restart();
+        });
     }
 
 }
@@ -80,16 +111,12 @@ class View {
     }
 
     setHandler() {
-
-        document.getElementById("answer-1").addEventListener("click", this.evaluate.bind(this));
-
-        document.getElementById("answer-1").addEventListener("mousedown", this.colorOn.bind(this));
-        document.getElementById("answer-1").addEventListener("mouseup", this.colorOff.bind(this));
-        document.getElementById("answer-2").addEventListener("mousedown", this.colorOn.bind(this));
-        document.getElementById("answer-3").addEventListener("mousedown", this.colorOn.bind(this));
-        document.getElementById("answer-4").addEventListener("mousedown", this.colorOn.bind(this));
-
-        document.getElementById("answer-1").addEventListener("click", this.colorOff.bind(this));
+        var buttons = document.querySelectorAll('#answers > button');
+        buttons.forEach(button => {
+            // button.addEventListener("click", this.evaluate.bind(this));
+            button.addEventListener("mousedown", this.colorOn.bind(this));
+            button.addEventListener("mouseup", this.colorOff.bind(this));
+        })
     }
 
     selectCategory(event) {
@@ -97,22 +124,40 @@ class View {
     }
 
     evaluate(event) {
-        console.log("View -> Evaluate: " + event.type + " " + event.target.nodeName);
-        console.log(event);
+        console.log("View -> Evaluate: Right " + right + " Wrong " + wrong + " Total " + total);
+        var elem = document.getElementById("statistik");
+        var text = "<li>Right: " + right + "</li>";
+        text += "<li>Wrong: " + wrong + "</li>";
+        text += "<li>Total: " + total + "</li>";
+        elem.innerHTML = text;
+        text = "";
+    }
+
+    restart() {
+        var elem = document.getElementById("statistik");
+        text = "<li>Right: 0</li>";
+        text += "<li>Wrong: 0</li>";
+        text += "<li>Total: 0</li>";
+        elem.innerHTML = text;
+        text = "";
     }
 
     colorOn(event) {
         if (event.target.nodeName.toLowerCase() === "button") {
-            this.color = event.target.style.backgroundColor;
-            console.log("colorOn: " + event.type + " Color: " + this.color);
+            // this.color = event.target.style.backgroundColor;
+            // console.log("colorOn: " + event.type + " Color: " + this.color);
+            // console.log("colorOn: " + event.type);
             if (event.target.id == "answer-1") {
                 event.target.style.backgroundColor = GREEN;
             } else event.target.style.backgroundColor = RED;
         }
-
     }
 
     colorOff(event) {
-        
+        // console.log("colorOff: " + event.type + " Color: " + this.color);
+        // console.log("colorOff: " + event.type);
+        if (event.target.nodeName.toLowerCase() === "button") {
+            event.target.style.backgroundColor = "white";
+        }
     }
 }

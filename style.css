@@ -94,10 +94,10 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+/* button:hover {
     background-color: black;
     color: white;
-}
+} */
 
 @media screen and (max-width: 800px) {
 	div.container {
