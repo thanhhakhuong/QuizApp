@@ -23,8 +23,8 @@
     <div class="container">
 
         <nav class="rounded-border">
-            <h2>Category</h2>
-            <input type="radio" name="category" value="allgemein" checked>
+            <h2>Kategorie</h2>
+            <input type="radio" name="category" value="allgemein">
             <label for="allgemein">Allgemein</label><br>
             <input type="radio" name="category" value="internettechnologien">
             <label for="internettechnologien">Internettechnologien</label><br>
@@ -36,7 +36,11 @@
 
         <aside class="rounded-border">             
             <h2>Statistik</h2>
-            <ul id="statistik"></ul>
+            <ul id="statistik">
+                <li id="right">Richtig: 0</li>
+                <li id="wrong">Falsch: 0</li>
+                <li id="total">Gesamt: 0</li>
+            </ul>
         </aside>
 
         <main class="rounded-border">

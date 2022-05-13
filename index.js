@@ -30,7 +30,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     p = new Presenter();
     v = new View(p);
     p.setModelAndView(m, v);
-    // setTimeout(p.start, 2000);
     p.start();
     p.evaluate();
 });
@@ -64,6 +63,13 @@ class Model {
             console.log("Right: " + right + " - Wrong: " + wrong + " - Total: " + total);
         })
     }
+
+    evaluate(event) {
+        if (event.target.id == "answer-1") right++;
+        else wrong++;
+        total = total + 1;
+        console.log("Model -> Evaluate " + right + "-" + wrong + "-" + total);
+    }
 }
 
 class Presenter {
@@ -83,22 +89,18 @@ class Presenter {
         var buttons = document.querySelectorAll('#answers > button');
         buttons.forEach(button => {
             button.addEventListener("click", (event) => {
-                console.log("Presenter -> Evaluate: " + event.type + " " + event.target.nodeName);
-                if (event.target.id == "answer-1") {
-                    right++;
-                } else wrong++;
-                total = total + 1;
-                console.log("Right: " + right + " - Wrong: " + wrong + " - Total: " + total);
-                v.evaluate();
+                console.log("Presenter -> evaluate");
+                m.evaluate(event);
+                v.evaluate(event);
             })
-        })
+        })      
     }
 
     restart() {
         let button = document.getElementById("restart");
         button.addEventListener("click", () => {
             m.restart();
-            p.restart();
+            v.restart();
         });
     }
 
@@ -124,28 +126,24 @@ class View {
     }
 
     evaluate(event) {
-        console.log("View -> Evaluate: Right " + right + " Wrong " + wrong + " Total " + total);
-        var elem = document.getElementById("statistik");
-        var text = "<li>Right: " + right + "</li>";
-        text += "<li>Wrong: " + wrong + "</li>";
-        text += "<li>Total: " + total + "</li>";
-        elem.innerHTML = text;
-        text = "";
+        console.log("View -> Evaluate");
+        var rightElem = document.getElementById("right");
+        rightElem.innerText = "Richtig: " + right; 
+        var wrongElem = document.getElementById("wrong");
+        wrongElem.innerText = "Falsch: " + wrong; 
+        var totalElem = document.getElementById("total");
+        totalElem.innerText = "Gesamt: " + total;
     }
 
     restart() {
-        var elem = document.getElementById("statistik");
-        text = "<li>Right: 0</li>";
-        text += "<li>Wrong: 0</li>";
-        text += "<li>Total: 0</li>";
-        elem.innerHTML = text;
-        text = "";
+        console.log("View -> Restart");
+        document.getElementById("right").innerText = "Richtig: 0";
+        document.getElementById("wrong").innerText = "Falsch: 0"; 
+        document.getElementById("total").innerText = "Gesamt: 0"; 
     }
 
     colorOn(event) {
         if (event.target.nodeName.toLowerCase() === "button") {
-            // this.color = event.target.style.backgroundColor;
-            // console.log("colorOn: " + event.type + " Color: " + this.color);
             // console.log("colorOn: " + event.type);
             if (event.target.id == "answer-1") {
                 event.target.style.backgroundColor = GREEN;
@@ -154,7 +152,6 @@ class View {
     }
 
     colorOff(event) {
-        // console.log("colorOff: " + event.type + " Color: " + this.color);
         // console.log("colorOff: " + event.type);
         if (event.target.nodeName.toLowerCase() === "button") {
             event.target.style.backgroundColor = "white";
