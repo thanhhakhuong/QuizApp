@@ -103,4 +103,9 @@ button {
 	div.container {
 		flex-direction: column;
 	}
+
+    main {
+        order: 3;
+    }
+
 }

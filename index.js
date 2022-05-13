@@ -17,9 +17,10 @@ let data = {
     {"a":"(C4 E4 G4)", "l": ["C", "H", "F", "D"]},
     ]       
 }
-let currentSet;
 let category;
 let right = wrong = total = 0;
+let currentIndex;
+
 const GREEN = "#C3EDBF";
 const RED = "#FF6961";
 
@@ -32,41 +33,62 @@ window.addEventListener('DOMContentLoaded', (event) => {
     p.setModelAndView(m, v);
     p.start();
     p.evaluate();
+    p.restart();
 });
 
 class Model {
     
     getTask() {
-        let category = "teil-internettechnologien";
+        // TODO: change this to return data
+        // render question separated in view
+        // intial task
+        category = "teil-allgemein";
+        let currentTask = data[category][0];
+        let questionElement = document.getElementById("question");
+        questionElement.innerHTML = currentTask["a"];
+        let answersElement = document.querySelectorAll("#answers > button");
+        for (let i = 0; i < 4; i++) {
+            answersElement[i].innerHTML = currentTask["l"][i];
+        }
+        // load new task when new category is selected
         var radios = document.getElementsByName('category');
         radios.forEach(radio => radio.addEventListener(
             'change', () => {
                 category = "teil-" + radio.value;
                 console.log("Model -> getTask: " + category);
-                let currentTask = data[category][0];
-                let questionElement = document.getElementById("question");
+                currentTask = data[category][0];
                 questionElement.innerHTML = currentTask["a"];
-                let answersElement = document.querySelectorAll("#answers > button");
+                answersElement = document.querySelectorAll("#answers > button");
                 for (let i = 0; i < 4; i++) {
                     answersElement[i].innerHTML = currentTask["l"][i];
-            }
+                }
         }))
-        return data;
+        // load new task when the answer is correct
+
+
     }
 
     restart() {
+        console.log("Model -> restart");
         let button = document.getElementById("restart");
         button.addEventListener("click", () => {
             right = 0;
             wrong = 0;
             total = 0;
-            console.log("Right: " + right + " - Wrong: " + wrong + " - Total: " + total);
         })
     }
 
     evaluate(event) {
-        if (event.target.id == "answer-1") right++;
-        else wrong++;
+        if (event.target.id == "answer-1") {
+            right++;
+            // load new task
+            if (currentIndex < data[category].length - 1) {
+                this.getTask();
+            }
+        }
+        else {
+            wrong++;
+        }
         total = total + 1;
         console.log("Model -> Evaluate " + right + "-" + wrong + "-" + total);
     }
@@ -82,7 +104,6 @@ class Presenter {
         console.log("Presenter -> start");
         v.setHandler();
         m.getTask();
-        m.restart();
     }
 
     evaluate() {
@@ -97,8 +118,8 @@ class Presenter {
     }
 
     restart() {
-        let button = document.getElementById("restart");
-        button.addEventListener("click", () => {
+        document.getElementById("restart").addEventListener("click", () => {
+            console.log("Presenter -> restart");
             m.restart();
             v.restart();
         });
