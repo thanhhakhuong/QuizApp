@@ -17,9 +17,9 @@ let data = {
     {"a":"(C4 E4 G4)", "l": ["C", "H", "F", "D"]},
     ]       
 }
-let category;
+let category = "teil-allgemein";
 let right = wrong = total = 0;
-let currentIndex;
+let currentIndex = 0;
 
 const GREEN = "#C3EDBF";
 const RED = "#FF6961";
@@ -39,11 +39,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
 class Model {
     
     getTask() {
+        console.log("Model -> getTask");
         // TODO: change this to return data
         // render question separated in view
+
         // intial task
-        category = "teil-allgemein";
-        let currentTask = data[category][0];
+        let currentTask = data[category][currentIndex];
         let questionElement = document.getElementById("question");
         questionElement.innerHTML = currentTask["a"];
         let answersElement = document.querySelectorAll("#answers > button");
@@ -56,15 +57,14 @@ class Model {
             'change', () => {
                 category = "teil-" + radio.value;
                 console.log("Model -> getTask: " + category);
-                currentTask = data[category][0];
+                currentIndex = 0;
+                currentTask = data[category][currentIndex];
                 questionElement.innerHTML = currentTask["a"];
                 answersElement = document.querySelectorAll("#answers > button");
                 for (let i = 0; i < 4; i++) {
                     answersElement[i].innerHTML = currentTask["l"][i];
                 }
         }))
-        // load new task when the answer is correct
-
 
     }
 
@@ -82,7 +82,10 @@ class Model {
         if (event.target.id == "answer-1") {
             right++;
             // load new task
-            if (currentIndex < data[category].length - 1) {
+            console.log("Category length: " + data[category].length);
+            if (currentIndex + 1 < data[category].length) {
+                currentIndex++;
+                console.log("Get new task " + currentIndex);
                 this.getTask();
             }
         }
@@ -90,7 +93,7 @@ class Model {
             wrong++;
         }
         total = total + 1;
-        console.log("Model -> Evaluate " + right + "-" + wrong + "-" + total);
+        // console.log("Model -> evaluate " + right + "-" + wrong + "-" + total);
     }
 }
 
@@ -110,7 +113,7 @@ class Presenter {
         var buttons = document.querySelectorAll('#answers > button');
         buttons.forEach(button => {
             button.addEventListener("click", (event) => {
-                console.log("Presenter -> evaluate");
+                // console.log("Presenter -> evaluate" + right + "-" + wrong + "-" + total);
                 m.evaluate(event);
                 v.evaluate(event);
             })
@@ -136,7 +139,6 @@ class View {
     setHandler() {
         var buttons = document.querySelectorAll('#answers > button');
         buttons.forEach(button => {
-            // button.addEventListener("click", this.evaluate.bind(this));
             button.addEventListener("mousedown", this.colorOn.bind(this));
             button.addEventListener("mouseup", this.colorOff.bind(this));
         })
@@ -146,8 +148,8 @@ class View {
         
     }
 
-    evaluate(event) {
-        console.log("View -> Evaluate");
+    evaluate() {
+        // console.log("View -> evaluate" + right + "-" + wrong + "-" + total);
         var rightElem = document.getElementById("right");
         rightElem.innerText = "Richtig: " + right; 
         var wrongElem = document.getElementById("wrong");
@@ -157,7 +159,7 @@ class View {
     }
 
     restart() {
-        console.log("View -> Restart");
+        // console.log("View -> Restart");
         document.getElementById("right").innerText = "Richtig: 0";
         document.getElementById("wrong").innerText = "Falsch: 0"; 
         document.getElementById("total").innerText = "Gesamt: 0"; 
