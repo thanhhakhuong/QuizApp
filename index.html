@@ -17,13 +17,16 @@
 <body>
 
     <header class="rounded-border text-center"> 
-        Lernprogramm 
+        <div id="progress">
+            <h2>Lernfortschritt</h2>
+            <div id="progress-bar"></div>
+        <div>
     </header>
     
-    <div class="container">
+    <div class="d-flex h-100">
 
         <nav class="rounded-border">
-            <h2>Kategorie</h2>
+            <h2>Kategorien</h2>
             <input type="radio" name="category" value="allgemein" checked>
             <label for="allgemein">Allgemein</label><br>
             <input type="radio" name="category" value="internettechnologien">
@@ -35,36 +38,25 @@
         </nav>
 
         <aside class="rounded-border">
-            <button id="restart">Restart</button>             
             <h2>Statistik</h2>
             <ul id="statistik">
-                <li id="right">Richtig: 0</li>
-                <li id="wrong">Falsch: 0</li>
-                <li id="total">Gesamt: 0</li>
+                <li id="rightNum">Richtig: 0</li>
+                <li id="wrongNum">Falsch: 0</li>
+                <li id="totalNum">Gesamt: 0</li>
             </ul>
+            <button id="restart">Restart</button>
         </aside>
 
-        <main class="rounded-border">
-
-            <div class="wrapper" id="progress">
-                Lernfortschritt <br>
-                <svg width="100%" height="35">
-                    <rect class="progress-bar" x="0" y="5"/>
-                </svg>
-                <span class="grade"></span>
-            </div>
-
-
-            <div class="wrapper text-center" id="task">
+        <main class="rounded-border text-center">
+            <div id="task">
                 <p id="question">Frage?</p>
                 <div id="answers">
-                    <button id="answer-1">A</button>
-                    <button id="answer-2">B</button>
-                    <button id="answer-3">C</button>
-                    <button id="answer-4">D</button>
+                    <button id="0">A</button>
+                    <button id="1">B</button>
+                    <button id="2">C</button>
+                    <button id="3">D</button>
                 </div>
             </div>
-
         </main>
     </div>
 

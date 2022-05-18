@@ -43,28 +43,6 @@ footer {
     margin: 5px;
 }
 
-.container {
-    display: flex;
-    height: 100%;
-}
-
-.progress-bar {
-    fill:#eee;
-    border-radius: 5px;
-    width: 100%;
-    height: 25px;
-}
-
-/* rect.right.progress-bar{
-    fill: #C3EDBF;
-    width: 40px;
-}
-
-rect.wrong.progress-bar{
-    fill: #FF7974;
-    width: 80px;
-} */
-
 .wrapper {
     border-radius: 5px;
     border: solid white 2px;
@@ -77,6 +55,41 @@ rect.wrong.progress-bar{
     text-align: center;
 }
 
+.d-flex {
+    display: flex;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.h-100 {
+    height: 100;
+}
+
+/* PROGRESS BAR */
+
+#progress-bar {
+    display: flex;
+    height: 25px;
+}
+
+.item {
+  flex-basis: 100%;
+  text-align: center;
+  height: 25px;
+  border: 1px solid black;
+}
+
+.item.right {
+    background-color: #C3EDBF;
+}
+
+.item.wrong {
+    background-color: #FF6169;
+}
+
+/* TASKS */
 #question {
     font-size: 1.75rem;
 }
@@ -86,7 +99,7 @@ div#task {
 }
 
 button {
-    background-color: white;
+    background-color: transparent;
     padding: 15px;
     margin: 5px;
     border-radius: 3px;
@@ -94,18 +107,22 @@ button {
     cursor: pointer;
 }
 
+
 button#restart {
     width: 100%;
     border: black solid 0.5px;
+    background-color: transparent;
 }
 
-/* button:hover {
+button#restart:hover {
     background-color: black;
     color: white;
-} */
+}
+
+/* MEDIA QUERY */
 
 @media screen and (max-width: 800px) {
-	div.container {
+	div.d-flex {
 		flex-direction: column;
 	}
 
