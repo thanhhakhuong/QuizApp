@@ -32,6 +32,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     p.start();
     p.evaluate();
     p.restart();
+
+        
 });
 
 class Presenter {
@@ -78,7 +80,6 @@ class Model {
         questionElement.innerHTML = currentTask["a"];
 
         if (category == "mathe") {
-            console.log("MATHE");
             katex.render(currentTask["a"], questionElement, {
                 throwOnError: false
             });
@@ -97,10 +98,37 @@ class Model {
             }
         }
 
-        var radios = document.getElementsByName('category');
-        radios.forEach(radio => radio.addEventListener(
-            'change', () => {
-                category = radio.value;
+        // var radios = document.getElementsByName('category');
+        // radios.forEach(radio => radio.addEventListener(
+        //     'change', () => {
+        //         category = radio.value;
+        //         console.log("Model -> getTask: " + category);
+        //         currentIndex = 0;
+        //         currentTask = myData[category][currentIndex];
+        //         if (category == "mathe") {
+        //             console.log("MATHE");
+        //             katex.render(currentTask["a"], questionElement, {
+        //                 throwOnError: false
+        //             });
+        //             for (let i = 0; i < 4; i++) {
+        //                 katex.render(currentTask["l"][i], answersElement[i], {
+        //                 throwOnError: false
+        //                 });
+        //                 answersElement[i].style.visibility = 'visible';
+        //             }
+        //         } else {
+        //             questionElement.innerHTML = currentTask["a"];
+        //             answersElement = document.querySelectorAll("#answers > button");
+        //             for (let i = 0; i < 4; i++) {
+        //                 answersElement[i].innerHTML = currentTask["l"][i];
+        //                 answersElement[i].style.visibility = 'visible';
+        //             }
+        //         }
+        // }))
+        var buttons = document.querySelectorAll('#categories > button');
+        buttons.forEach(button => {
+            button.addEventListener("click", (event) => {
+                category = button.value;
                 console.log("Model -> getTask: " + category);
                 currentIndex = 0;
                 currentTask = myData[category][currentIndex];
@@ -123,7 +151,10 @@ class Model {
                         answersElement[i].style.visibility = 'visible';
                     }
                 }
-        }))
+            })
+        })  
+        
+
 
     }
 
@@ -152,6 +183,7 @@ class Model {
                 this.getTask();
             } else {
                 document.getElementById("question").innerHTML = "Herzlichen Glückwunsch, Sie haben alle Fragen in dieser Kategorie beantwortet!";
+                // document.getElementById("answer").style.visibility = 'hidden';
                 let buttons = document.querySelectorAll('#answers > button');
                 for (let i = 0; i < 4; i++) {
                         buttons[i].style.visibility = 'hidden';

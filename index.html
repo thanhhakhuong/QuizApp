@@ -22,49 +22,37 @@
     
     <div class="d-flex h-100">
 
-        <nav class="rounded-border dark-border m-5">
+        <nav class="m-5 text-center" id="categories">
             <h2>Kategorien</h2>
-            <ul class="no-bullets categories">
-                <li>
-                    <input type="radio" name="category" value="allgemein" checked>
-                    <label for="allgemein">Allgemein</label><br>
-                </li>
-                <li>
-                    <input type="radio" name="category" value="internettechnologien">
-                    <label for="internettechnologien">Internettechnologien</label><br>
-                </li>
-                <li>
-                    <input type="radio" name="category" value="mathe">
-                    <label for="mathek">Mathematik</label><br>
-                </li>
-            </ul>
+            <button class="rounded-border dark-border" value="allgemein">Allgemein</button>
+            <button class="rounded-border dark-border" value="internettechnologien">Internettechnologien</button>
+            <button class="rounded-border dark-border" value="mathe">Mathematik</button>
+            <!-- <button class="rounded-border dark-border" value="ajax">Web Quiz</button> -->
         </nav>
 
-        <aside class="rounded-border dark-border m-5">
+        <aside class="m-5 text-center">
             <h2>Statistik</h2>
-            <ul class="no-bullets" id="statistik">
-                <li id="rightNum">Richtig: 0</li>
-                <li id="wrongNum">Falsch: 0</li>
-                <li id="totalNum">Gesamt: 0</li>
-            </ul>
+            <p class="rounded-border dark-border" id="totalNum">Gesamt: 0</p>
+            <p class="rounded-border dark-border" id="rightNum">Richtig: 0</p>
+            <p class="rounded-border dark-border" id="wrongNum">Falsch: 0</p>
+            <button class="rounded-border" id="restart">Restart</button>
         </aside>
 
         <main class="rounded-border text-center dark-border m-5 light-background">
             <div id="progress-bar"></div>
             <div id="task">
-                <p id="question">Frage?</p>
+                <p id="question"></p>
                 <div id="answers">
-                    <button id="0">A</button>
-                    <button id="1">B</button>
-                    <button id="2">C</button>
-                    <button id="3">D</button>
+                    <button id="0"></button>
+                    <button id="1"></button>
+                    <button id="2"></button>
+                    <button id="3"></button>
                 </div>
             </div>
         </main>
     </div>
 
     <footer class="rounded-border text-center ">
-        <button class="rounded-border" id="restart">Restart</button>
     </footer>
 
 </body>
