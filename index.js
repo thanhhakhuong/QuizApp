@@ -1,26 +1,24 @@
 
 const GREEN = "#C3EDBF";
 const RED = "#FF6961";
-/* JSON DATA for questions and answers */
-const DATA = { 
-  "teil-mathe": [
+
+/* JSON myData for questions and answers */
+const myData = { 
+  "mathe": [
     {"a":"x^2+x^2", "l":["2x^2","x^4","x^8","2x^4"]},
     {"a":"x^2*x^2", "l":["x^4","x^2","2x^2","4x"]}
     ],
-  "teil-internettechnologien": [
+  "internettechnologien": [
     {"a":"Welche Authentifizierung bietet HTTP", "l":["Digest Access Authentication","OTP","OAuth","2-Faktor-Authentifizierung"]},
     {"a":"Welches Transportprotokoll eignet sich für zeitkritische Übertragungen", "l":["UDP","TCP","HTTP","Fast Retransmit"]},
     ],
-  "teil-allgemein": [
+  "allgemein": [
     {"a":"Karl der Große, Geburtsjahr", "l":["747","828","650","1150"]},
-    ],
-  "teil-noten": [
-    {"a":"C4", "l":["C","D","E","H"]},
-    {"a":"(C4 E4 G4)", "l": ["C", "H", "F", "D"]},
-    ]       
+    ]
 }
+
 let p, v, m;
-let category = "teil-allgemein";
+let category = "allgemein";
 let right = wrong = total = 0;
 let currentIndex = 0;
 
@@ -52,7 +50,6 @@ class Presenter {
         var buttons = document.querySelectorAll('#answers > button');
         buttons.forEach(button => {
             button.addEventListener("click", (event) => {
-                // console.log("Presenter -> evaluate" + right + "-" + wrong + "-" + total);
                 m.evaluate(event);
                 v.evaluate(event);
             })
@@ -70,35 +67,65 @@ class Presenter {
 }
 
 class Model {
-    // TODO: add get category
     
     getTask() {
         console.log("Model -> getTask");
-        // TODO: change this to return DATA
+        // TODO: change this to return myData
         // render question separated in view
 
         // intial task
-        let currentTask = DATA[category][currentIndex];
+        let currentTask = myData[category][currentIndex];
         let questionElement = document.getElementById("question");
-        questionElement.innerHTML = currentTask["a"];
         let answersElement = document.querySelectorAll("#answers > button");
-        for (let i = 0; i < 4; i++) {
-            answersElement[i].innerHTML = currentTask["l"][i];
+
+        questionElement.innerHTML = currentTask["a"];
+
+        if (category == "mathe") {
+            console.log("MATHE");
+            katex.render(currentTask["a"], questionElement, {
+                throwOnError: false
+            });
+            for (let i = 0; i < 4; i++) {
+                katex.render(currentTask["l"][i], answersElement[i], {
+                throwOnError: false
+                });
+                answersElement[i].disabled = false;
+            }
+        } else {
+            questionElement.innerHTML = currentTask["a"];
+            answersElement = document.querySelectorAll("#answers > button");
+            for (let i = 0; i < 4; i++) {
+                answersElement[i].innerHTML = currentTask["l"][i];
+                answersElement[i].disabled = false;
+            }
         }
+
         // load new task when new category is selected
         var radios = document.getElementsByName('category');
         radios.forEach(radio => radio.addEventListener(
             'change', () => {
-                category = "teil-" + radio.value;
+                category = radio.value;
                 console.log("Model -> getTask: " + category);
                 currentIndex = 0;
-                currentTask = DATA[category][currentIndex];
-                // TODO: move this to view - create displayTask() function
-                questionElement.innerHTML = currentTask["a"];
-                answersElement = document.querySelectorAll("#answers > button");
-                for (let i = 0; i < 4; i++) {
-                    answersElement[i].innerHTML = currentTask["l"][i];
-                    answersElement[i].disabled = false;
+                currentTask = myData[category][currentIndex];
+                if (category == "mathe") {
+                    console.log("MATHE");
+                    katex.render(currentTask["a"], questionElement, {
+                        throwOnError: false
+                    });
+                    for (let i = 0; i < 4; i++) {
+                        katex.render(currentTask["l"][i], answersElement[i], {
+                        throwOnError: false
+                        });
+                        answersElement[i].disabled = false;
+                    }
+                } else {
+                    questionElement.innerHTML = currentTask["a"];
+                    answersElement = document.querySelectorAll("#answers > button");
+                    for (let i = 0; i < 4; i++) {
+                        answersElement[i].innerHTML = currentTask["l"][i];
+                        answersElement[i].disabled = false;
+                    }
                 }
         }))
 
@@ -122,8 +149,8 @@ class Model {
             right++;
             progressBarElem.innerHTML += rightItem;
             // load new task - merge this into getTask
-            console.log("Category length: " + DATA[category].length);
-            if (currentIndex + 1 < DATA[category].length) {
+            console.log("Category length: " + myData[category].length);
+            if (currentIndex + 1 < myData[category].length) {
                 currentIndex++;
                 console.log("Get new task " + currentIndex);
                 this.getTask();
