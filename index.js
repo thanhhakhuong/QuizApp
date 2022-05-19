@@ -70,10 +70,7 @@ class Model {
     
     getTask() {
         console.log("Model -> getTask");
-        // TODO: change this to return myData
-        // render question separated in view
 
-        // intial task
         let currentTask = myData[category][currentIndex];
         let questionElement = document.getElementById("question");
         let answersElement = document.querySelectorAll("#answers > button");
@@ -89,18 +86,17 @@ class Model {
                 katex.render(currentTask["l"][i], answersElement[i], {
                 throwOnError: false
                 });
-                answersElement[i].disabled = false;
+                answersElement[i].style.visibility = 'visible';
             }
         } else {
             questionElement.innerHTML = currentTask["a"];
             answersElement = document.querySelectorAll("#answers > button");
             for (let i = 0; i < 4; i++) {
                 answersElement[i].innerHTML = currentTask["l"][i];
-                answersElement[i].disabled = false;
+                answersElement[i].style.visibility = 'visible';
             }
         }
 
-        // load new task when new category is selected
         var radios = document.getElementsByName('category');
         radios.forEach(radio => radio.addEventListener(
             'change', () => {
@@ -117,14 +113,14 @@ class Model {
                         katex.render(currentTask["l"][i], answersElement[i], {
                         throwOnError: false
                         });
-                        answersElement[i].disabled = false;
+                        answersElement[i].style.visibility = 'visible';
                     }
                 } else {
                     questionElement.innerHTML = currentTask["a"];
                     answersElement = document.querySelectorAll("#answers > button");
                     for (let i = 0; i < 4; i++) {
                         answersElement[i].innerHTML = currentTask["l"][i];
-                        answersElement[i].disabled = false;
+                        answersElement[i].style.visibility = 'visible';
                     }
                 }
         }))
@@ -157,7 +153,9 @@ class Model {
             } else {
                 document.getElementById("question").innerHTML = "Herzlichen Glückwunsch, Sie haben alle Fragen in dieser Kategorie beantwortet!";
                 let buttons = document.querySelectorAll('#answers > button');
-                buttons.forEach(button => button.disabled = true);
+                for (let i = 0; i < 4; i++) {
+                        buttons[i].style.visibility = 'hidden';
+                    }
             }
         }
         else {

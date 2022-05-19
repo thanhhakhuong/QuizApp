@@ -17,35 +17,40 @@
 <body>
 
     <header class="rounded-border text-center"> 
-        <div id="progress">
-            <h2>Lernfortschritt</h2>
-            <div id="progress-bar"></div>
-        <div>
+        <h1>LERNPROGRAMM</h1>
     </header>
     
     <div class="d-flex h-100">
 
-        <nav class="rounded-border">
+        <nav class="rounded-border dark-border m-5">
             <h2>Kategorien</h2>
-            <input type="radio" name="category" value="allgemein" checked>
-            <label for="allgemein">Allgemein</label><br>
-            <input type="radio" name="category" value="internettechnologien">
-            <label for="internettechnologien">Internettechnologien</label><br>
-            <input type="radio" name="category" value="mathe">
-            <label for="mathek">Mathematik</label><br>
+            <ul class="no-bullets categories">
+                <li>
+                    <input type="radio" name="category" value="allgemein" checked>
+                    <label for="allgemein">Allgemein</label><br>
+                </li>
+                <li>
+                    <input type="radio" name="category" value="internettechnologien">
+                    <label for="internettechnologien">Internettechnologien</label><br>
+                </li>
+                <li>
+                    <input type="radio" name="category" value="mathe">
+                    <label for="mathek">Mathematik</label><br>
+                </li>
+            </ul>
         </nav>
 
-        <aside class="rounded-border">
+        <aside class="rounded-border dark-border m-5">
             <h2>Statistik</h2>
-            <ul id="statistik">
+            <ul class="no-bullets" id="statistik">
                 <li id="rightNum">Richtig: 0</li>
                 <li id="wrongNum">Falsch: 0</li>
                 <li id="totalNum">Gesamt: 0</li>
             </ul>
-            <button id="restart">Restart</button>
         </aside>
 
-        <main class="rounded-border text-center">
+        <main class="rounded-border text-center dark-border m-5 light-background">
+            <div id="progress-bar"></div>
             <div id="task">
                 <p id="question">Frage?</p>
                 <div id="answers">
@@ -59,7 +64,7 @@
     </div>
 
     <footer class="rounded-border text-center ">
-        Viel Spaß beim Lernen!
+        <button class="rounded-border" id="restart">Restart</button>
     </footer>
 
 </body>

@@ -5,49 +5,43 @@ body {
 }
 
 header {
-    background-color: #FFD1DA;
     margin-top: 15px;
 }
 
 nav {
-    background-color: #C3EDBF;
     order: 1;
     flex: 1 1 0;
 }
 
 main {
-    background-color: #fff1cd;
     order: 2;
     flex: 3 3 0;
-    height: 400px;
 }
 
 aside {
-    background-color: #beebf2;
     order: 3;
     flex: 1 1 0;
 }
 
 footer {
     margin-bottom: 15px;
-    background-color: #d5cdeb;
 }
 
 .m-5 {
     margin: 5px;
 }
 
-.rounded-border {
-    border-radius: 10px;
-    padding: 20px;
-    margin: 5px;
+.light-background {
+    background-color: #e6e6e6;
 }
 
-.wrapper {
+.rounded-border {
     border-radius: 5px;
-    border: solid white 2px;
     padding: 10px;
-    margin: 5px;
+}
+
+.dark-border {
+    border: solid #1c1c1c 2px;
     margin-bottom: 10px;
 }
 
@@ -71,14 +65,16 @@ footer {
 
 #progress-bar {
     display: flex;
-    height: 25px;
+    height: 15px;
 }
 
 .item {
   flex-basis: 100%;
   text-align: center;
-  height: 25px;
-  border: 1px solid black;
+  height: 15px;
+  border: 2px solid black;
+  border-radius: 3px;
+  margin: 2px;
 }
 
 .item.right {
@@ -90,27 +86,28 @@ footer {
 }
 
 /* TASKS */
+
+div#task {
+    margin: 100px 5px;
+}
+
 #question {
     font-size: 1.75rem;
 }
 
-div#task {
-    height: 270px;
-}
-
-button {
+#task button {
     background-color: transparent;
-    padding: 15px;
+    padding: 5px;
     margin: 5px;
-    border-radius: 3px;
-    border: black solid 0.5px;
+    border-radius: 2px;
+    border: black solid 2px;
     cursor: pointer;
+    font-size: large;
 }
-
 
 button#restart {
     width: 100%;
-    border: black solid 0.5px;
+    border: black solid 2px;
     background-color: transparent;
 }
 
@@ -130,4 +127,10 @@ button#restart:hover {
         order: 3;
     }
 
+}
+
+ul.no-bullets {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
 }
