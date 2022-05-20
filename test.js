@@ -31,8 +31,10 @@ function loadAjax() {
 	}
 	
 	function sendXhr() {
+		let url = 'https://irene.informatik.htw-dresden.de:8888/api/quizzes/2';
 		xhr.onreadystatechange = xhrHandler;
-		xhr.open('GET', 'http://idefix.informatik.htw-dresden.de/it1/js/ajaxdemo.txt');
+		xhr.open('GET', url);
+		xhr.setRequestHeader("Authorization", "Basic " + window.btoa("s81983@gmail.com:secret"));
 		xhr.send(null);
 		console.debug("Request send");
 	}
