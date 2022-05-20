@@ -1,7 +1,3 @@
-
-const GREEN = "#C3EDBF";
-const RED = "#FF6961";
-
 class Presenter {
     setModelAndView(m, v) {
         this.m = m;
@@ -19,8 +15,8 @@ class Presenter {
         var buttons = document.querySelectorAll('#answers > button');
         buttons.forEach(button => {
             button.addEventListener("click", (event) => {
-                m.evaluate(event);
-                v.evaluate(event);
+                stat = m.evaluate(event);
+                v.evaluate(stat);
             })
         })      
     }

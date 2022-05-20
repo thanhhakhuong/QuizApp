@@ -1,3 +1,6 @@
+const GREEN = "#C3EDBF";
+const RED = "#FF6961";
+
 class View {
 
     constructor(p) {
@@ -13,23 +16,17 @@ class View {
         })
     }
 
-    displayTask() {
+    displayTask(task) {
         
     }
 
-    evaluate() {
-        // console.log("View -> evaluate" + right + "-" + wrong + "-" + total);
-        var rightElem = document.getElementById("rightNum");
-        rightElem.innerText = "Richtig: " + right; 
-        var wrongElem = document.getElementById("wrongNum");
-        wrongElem.innerText = "Falsch: " + wrong; 
-        var totalElem = document.getElementById("totalNum");
-        totalElem.innerText = "Gesamt: " + total;
-        
+    evaluate(stat) {
+        document.getElementById("rightNum").innerText = "Richtig: " + stat['right']; 
+        document.getElementById("wrongNum").innerText = "Falsch: " + stat['right']; 
+        document.getElementById("totalNum").innerText = "Gesamt: " + stat['total']; 
     }
 
     restart() {
-        // console.log("View -> Restart");
         document.getElementById("rightNum").innerText = "Richtig: 0";
         document.getElementById("wrongNum").innerText = "Falsch: 0"; 
         document.getElementById("totalNum").innerText = "Gesamt: 0"; 
@@ -38,7 +35,6 @@ class View {
 
     colorOn(event) {
         if (event.target.nodeName.toLowerCase() === "button") {
-            // console.log("colorOn: " + event.type);
             if (event.target.id == "0") {
                 event.target.style.backgroundColor = GREEN;
             } else event.target.style.backgroundColor = RED;
@@ -46,7 +42,6 @@ class View {
     }
 
     colorOff(event) {
-        // console.log("colorOff: " + event.type);
         if (event.target.nodeName.toLowerCase() === "button") {
             event.target.style.backgroundColor = "transparent";
         }

@@ -14,20 +14,13 @@ const myData = {
 }
 
 let p, v, m;
-// let category = "allgemein";
-// let right = wrong = total = 0;
-// let currentIndex = 0;
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    console.log('DOM fully loaded and parsed');
-
-    m = new Model();
-    p = new Presenter();
-    v = new View(p);
-    p.setModelAndView(m, v);
-    p.start();
-    p.evaluate();
-    p.restart();
-
-        
+  m = new Model();
+  p = new Presenter();
+  v = new View(p);
+  p.setModelAndView(m, v);
+  p.start();
+  p.evaluate();
+  p.restart();
 });
