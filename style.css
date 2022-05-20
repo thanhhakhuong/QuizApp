@@ -139,6 +139,11 @@ div#task {
     font-size: large;
 }
 
+#task button:hover {
+    border: white solid 2px;
+    color: white;
+}
+
 /* STATISTIK */
 
 
