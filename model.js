@@ -16,13 +16,24 @@ class Model {
     getCategory() {
         let categoriesEl = document.querySelectorAll('#categories > button');
         let answersEl = document.querySelectorAll("#answers > button");
+        // let btn = document.createElement("button");
+        // btn.innerHTML = "Submit";
+        // btn.type = "submit";
+        // btn.name = "formBtn";
+        // let parent = document.getElementById("task");
         for (let i = 0; i < 4; i++) {
             categoriesEl[i].addEventListener("click", (event) => {
                 category = event.target.value;
                 index = 0;
                 answersEl.forEach(button => button.style.visibility = 'visible');
-                if (i < 3) this.getTask();
-                else this.loadAjax();
+                if (i < 3) {
+                    this.getTask();
+                    // if(parent.contains(btn)) parent.removeChild(btn);
+                }
+                else {
+                    this.loadAjax();
+                    // parent.appendChild(btn);
+                }
             })
         };
     }
