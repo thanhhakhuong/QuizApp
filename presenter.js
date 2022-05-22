@@ -12,8 +12,8 @@ class Presenter {
     }
 
     evaluate() {
-        var buttons = document.querySelectorAll('#answers > button');
-        buttons.forEach(button => {
+        var answersEl = document.querySelectorAll('#answers > button');
+        answersEl.forEach(button => {
             button.addEventListener("click", (event) => {
                 stat = m.evaluate(event);
                 v.evaluate(stat);

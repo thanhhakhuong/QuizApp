@@ -6,8 +6,8 @@ class View {
     }
 
     setHandler() {
-        let buttons = document.querySelectorAll('#answers > button');
-        buttons.forEach(button => {
+        let answersEl = document.querySelectorAll('#answers > button');
+        answersEl.forEach(button => {
             button.addEventListener("mousedown", this.colorOn.bind(this));
             button.addEventListener("mouseup", this.colorOff.bind(this));
         })
@@ -17,18 +17,18 @@ class View {
         let questionEl = document.getElementById("question");
         let answersEl = document.querySelectorAll("#answers > button");
 
-        questionEl.innerHTML = task["a"];
+        questionEl.innerHTML = task["text"];
         answersEl = document.querySelectorAll("#answers > button");
         for (let i = 0; i < 4; i++) {
-            answersEl[i].innerHTML = task["l"][i];
+            answersEl[i].innerHTML = task["options"][i];
         }
 
         if (category == "mathe") {
-            katex.render(task["a"], questionEl, {
+            katex.render(task["text"], questionEl, {
                 throwOnError: false
             });
             for (let i = 0; i < 4; i++) {
-                katex.render(task["l"][i], answersEl[i], {
+                katex.render(task["options"][i], answersEl[i], {
                     throwOnError: false
                 });
             }
@@ -37,7 +37,7 @@ class View {
 
     evaluate(stat) {
         document.getElementById("rightNum").innerText = "Richtig: " + stat['right']; 
-        document.getElementById("wrongNum").innerText = "Falsch: " + stat['right']; 
+        document.getElementById("wrongNum").innerText = "Falsch: " + stat['wrong']; 
         document.getElementById("totalNum").innerText = "Gesamt: " + stat['total']; 
         if(stat['result'] == true) document.getElementById("progress-bar").innerHTML += "<div class=\"item right\"/></div>";
         if(stat['result'] == false) document.getElementById("progress-bar").innerHTML += "<div class=\"item wrong\"/></div>";

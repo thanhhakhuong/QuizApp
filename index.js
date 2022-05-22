@@ -1,15 +1,15 @@
 /* JSON myData for questions and answers */
 const myData = { 
   "mathe": [
-    {"a":"x^2+x^2", "l":["2x^2","x^4","x^8","2x^4"]},
-    {"a":"x^2*x^2", "l":["x^4","x^2","2x^2","4x"]}
+    {"text":"x^2+x^2", "options":["2x^2","x^4","x^8","2x^4"]},
+    {"text":"x^2*x^2", "options":["x^4","x^2","2x^2","4x"]}
     ],
   "internettechnologien": [
-    {"a":"Welche Authentifizierung bietet HTTP", "l":["Digest Access Authentication","OTP","OAuth","2-Faktor-Authentifizierung"]},
-    {"a":"Welches Transportprotokoll eignet sich für zeitkritische Übertragungen", "l":["UDP","TCP","HTTP","Fast Retransmit"]},
+    {"text":"Welche Authentifizierung bietet HTTP", "options":["Digest Access Authentication","OTP","OAuth","2-Faktor-Authentifizierung"]},
+    {"text":"Welches Transportprotokoll eignet sich für zeitkritische Übertragungen", "options":["UDP","TCP","HTTP","Fast Retransmit"]},
     ],
   "allgemein": [
-    {"a":"Karl der Große, Geburtsjahr", "l":["747","828","650","1150"]},
+    {"text":"Karl der Große, Geburtsjahr", "options":["747","828","650","1150"]},
     ]
 }
 
