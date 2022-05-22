@@ -1,6 +1,3 @@
-const GREEN = "#C3EDBF";
-const RED = "#FF6961";
-
 class View {
 
     constructor(p) {
@@ -17,13 +14,33 @@ class View {
     }
 
     displayTask(task) {
-        
+        let questionEl = document.getElementById("question");
+        let answersEl = document.querySelectorAll("#answers > button");
+
+        questionEl.innerHTML = task["a"];
+        answersEl = document.querySelectorAll("#answers > button");
+        for (let i = 0; i < 4; i++) {
+            answersEl[i].innerHTML = task["l"][i];
+        }
+
+        if (category == "mathe") {
+            katex.render(task["a"], questionEl, {
+                throwOnError: false
+            });
+            for (let i = 0; i < 4; i++) {
+                katex.render(task["l"][i], answersEl[i], {
+                    throwOnError: false
+                });
+            }
+        }
     }
 
     evaluate(stat) {
         document.getElementById("rightNum").innerText = "Richtig: " + stat['right']; 
         document.getElementById("wrongNum").innerText = "Falsch: " + stat['right']; 
         document.getElementById("totalNum").innerText = "Gesamt: " + stat['total']; 
+        if(stat['result'] == true) document.getElementById("progress-bar").innerHTML += "<div class=\"item right\"/></div>";
+        if(stat['result'] == false) document.getElementById("progress-bar").innerHTML += "<div class=\"item wrong\"/></div>";
     }
 
     restart() {
@@ -36,8 +53,8 @@ class View {
     colorOn(event) {
         if (event.target.nodeName.toLowerCase() === "button") {
             if (event.target.id == "0") {
-                event.target.style.backgroundColor = GREEN;
-            } else event.target.style.backgroundColor = RED;
+                event.target.style.backgroundColor = "#C3EDBF";
+            } else event.target.style.backgroundColor = "#FF6961";
         }
     }
 

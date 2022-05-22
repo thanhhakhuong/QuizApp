@@ -28,8 +28,8 @@ function loadAjax() {
 		if (xhr.status == 200) {
 			let data = JSON.parse(xhr.responseText);
 			console.log(data['content']);
-			console.log(xhr.responseText);
-			// displayTask(data);
+			// console.log(xhr.responseText);
+			displayTask(data);
 		} 
 	}
 	
