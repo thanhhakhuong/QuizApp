@@ -1,26 +1,24 @@
-let category = "allgemein";
-let index = 0;
-let stat = {
-    "right": 0,
-    "wrong": 0,
-    "total": 0,
-    "result": null
-}
-let message = "Herzlichen Glückwunsch, Sie haben alle Fragen in dieser Kategorie beantwortet!";
 const email = "s81983@gmail.com";
 const password = "secret";
+let category = "allgemein";
+let index = 0;
+let success = null;
+let message = "Herzlichen Glückwunsch, Sie haben alle Fragen in dieser Kategorie beantwortet!";
 let randomId;
 
 class Model {
 
     getCategory() {
+        
         let categoriesEl = document.querySelectorAll('#categories > button');
         let answersEl = document.querySelectorAll("#answers > button");
-        // let btn = document.createElement("button");
-        // btn.innerHTML = "Submit";
-        // btn.type = "submit";
-        // btn.name = "formBtn";
-        // let parent = document.getElementById("task");
+        let taskEl = document.getElementById("task");
+
+        let btn = document.createElement("button");
+        btn.innerHTML = "Submit";
+        btn.type = "submit";
+        btn.name = "formBtn";
+
         for (let i = 0; i < 4; i++) {
             categoriesEl[i].addEventListener("click", (event) => {
                 category = event.target.value;
@@ -28,11 +26,12 @@ class Model {
                 answersEl.forEach(button => button.style.visibility = 'visible');
                 if (i < 3) {
                     this.getTask();
-                    // if(parent.contains(btn)) parent.removeChild(btn);
+                    if(taskEl.contains(btn)) taskEl.removeChild(btn);
                 }
                 else {
+                    taskEl.appendChild(btn);
                     this.loadAjax();
-                    // parent.appendChild(btn);
+                    // btn.addEventListener("click", () => this.checkAjax());
                 }
             })
         };
@@ -44,22 +43,16 @@ class Model {
     }
 
     restart() {
-        stat = {
-            "right": 0,
-            "wrong": 0,
-            "total": 0,
-            "result": null
-        }
+        success = null;
     }
 
     evaluate(event) {
-        // TODO: add categories constraint
         // if (event.target.nodeName.toLowerCase() === "button") {
+        if (category != 'ajax') {
+            console.log("62 " + category);
             if (event.target.id == "0") {
-                stat['right']++;
-                stat['result'] = true;
-                if (category != 'ajax') {
-                    if (index + 1 < myData[category].length) {
+                success = true;
+                    if (index < myData[category].length - 1) {
                         index++;
                         this.getTask();
                     } else
@@ -70,58 +63,101 @@ class Model {
                             answersEl[i].style.visibility = 'hidden';
                         }
                     }
-                } else {
-                    this.loadAjax();
-                }
-            }
+                } 
             else {
-                stat['wrong']++;
-                stat['result'] = false;
+                success = false;
             }
-            stat['total']++;
-            return stat;
+        }
+        else {
+            this.checkAjax();
+            // this.loadAjax();
+        }
+        return success;
         // }
     }
 
     loadAjax() {
 
-	let xhr = getXhr();
-	sendXhr(xhr);
+        let xhr = getXhr();
+        sendXhr(xhr);
 
-	function getXhr() { // API für asynchrone Aufrufe
-	if (window.XMLHttpRequest) {
-		var xhr = new XMLHttpRequest();
-		return xhr;
-	} else return false;
-	}
+        function getXhr() { // API für asynchrone Aufrufe
+        if (window.XMLHttpRequest) {
+            var xhr = new XMLHttpRequest();
+            return xhr;
+        } else return false;
+        }
 
-	function xhrHandler() {
-		// console.log( "Status: " + xhr.readyState );
-		if (xhr.readyState != 4) { 
-			return; 
-		}
-		if (xhr.status == 404) {
-			sendXhr(xhr);
-		}
-		// console.log( "Status: " + xhr.readyState + " " + xhr.status);
-		if (xhr.status == 200) {
-			console.log(xhr.responseText);
-			let data = JSON.parse(xhr.responseText);
-			// console.log(data['content']);
-			v.displayTask(data);
-		}
-	}
-	
-	function sendXhr() {
-		randomId = Math.floor(Math.random() * 30) + 1;
-		let url = 'https://irene.informatik.htw-dresden.de:8888/api/quizzes/' + randomId;
-		xhr.onreadystatechange = xhrHandler;
-		xhr.open('GET', url);
-		xhr.setRequestHeader("Authorization", "Basic " + window.btoa(email + ":" + password));
-		xhr.send(null);
-		console.debug("Request send");
-	}
+        function xhrHandler() {
+            // console.log( "Status: " + xhr.readyState );
+            if (xhr.readyState != 4) { 
+                return; 
+            }
+            if (xhr.status == 404) {
+                sendXhr(xhr);
+            }
+            // console.log( "Status: " + xhr.readyState + " " + xhr.status);
+            if (xhr.status == 200) {
+                let data = JSON.parse(xhr.responseText);
+                // console.log(data);
+                v.displayTask(data);
+            }
+        }
+        
+        function sendXhr() {
+            randomId = Math.floor(Math.random() * 30) + 1;
+            let url = 'https://irene.informatik.htw-dresden.de:8888/api/quizzes/' + randomId;
+            xhr.onreadystatechange = xhrHandler;
+            xhr.open('GET', url);
+            xhr.setRequestHeader("Authorization", "Basic " + window.btoa(email + ":" + password));
+            xhr.send(null);
+            console.debug("Request send");
+        }
 
-}
+    }
+
+    checkAjax(event) {
+        // console.log(event.target.id);
+        // let answer = parseInt(event.target.id);
+        // answers.push(answer);
+        // console.log(JSON.stringify(answers));
+        let xhr = getXhr();
+        sendXhr(xhr);
+
+        function getXhr() { // API für asynchrone Aufrufe
+        if (window.XMLHttpRequest) {
+            var xhr = new XMLHttpRequest();
+            return xhr;
+        } else return false;
+        }
+
+        function xhrHandler() {
+            console.log( "Status: " + xhr.readyState );
+            if (xhr.readyState != 4) { 
+                return; 
+            }
+            console.log( "Status: " + xhr.readyState + " " + xhr.status);
+            if (xhr.status == 200) {
+                let data = JSON.parse(xhr.responseText);
+                console.log(data);
+            } 
+        }
+        
+        function sendXhr() {
+            let url = 'https://irene.informatik.htw-dresden.de:8888/api/quizzes/1/solve';
+            xhr.onreadystatechange = xhrHandler;
+            xhr.open('POST', url);
+            xhr.setRequestHeader("Authorization", "Basic " + window.btoa("s81983@gmail.com:secret"));
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("Accept", "application/json");
+            let dataToSend = "[2]";
+            console.log(dataToSend);
+            xhr.send(dataToSend);
+            // xhr.send(JSON.stringify(answers));
+            console.debug("Request send");
+        }
+        // console.log("185" + xhr.responseText);
+        // return data;
+    }
 
 }

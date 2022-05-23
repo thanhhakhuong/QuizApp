@@ -1,3 +1,7 @@
+let right = 0;
+let wrong = 0;
+let total = 0;
+
 class View {
 
     constructor(p) {
@@ -35,19 +39,27 @@ class View {
         }
     }
 
-    evaluate(stat) {
-        document.getElementById("rightNum").innerText = "Richtig: " + stat['right']; 
-        document.getElementById("wrongNum").innerText = "Falsch: " + stat['wrong']; 
-        document.getElementById("totalNum").innerText = "Gesamt: " + stat['total']; 
-        if(stat['result'] == true) document.getElementById("progress-bar").innerHTML += "<div class=\"item right\"/></div>";
-        if(stat['result'] == false) document.getElementById("progress-bar").innerHTML += "<div class=\"item wrong\"/></div>";
-    }
-
-    restart() {
-        document.getElementById("rightNum").innerText = "Richtig: 0";
-        document.getElementById("wrongNum").innerText = "Falsch: 0"; 
-        document.getElementById("totalNum").innerText = "Gesamt: 0"; 
-        document.getElementById("progress-bar").innerHTML = "";
+    displayEvaluation(success) {
+        if (success == null) {
+            document.getElementById("rightNum").innerText = "Richtig: 0";
+            document.getElementById("wrongNum").innerText = "Falsch: 0"; 
+            document.getElementById("totalNum").innerText = "Gesamt: 0"; 
+            document.getElementById("progress-bar").innerHTML = "";
+        } else {
+            if (success == true) {
+                right++;
+                document.getElementById("rightNum").innerText = "Richtig: " + right;
+                document.getElementById("progress-bar").innerHTML += "<div class=\"item right\"/></div>";
+            }
+            else {
+                wrong++;
+                document.getElementById("wrongNum").innerText = "Falsch: " + wrong;
+                document.getElementById("progress-bar").innerHTML += "<div class=\"item wrong\"/></div>";
+            }
+    
+            total++;
+            document.getElementById("totalNum").innerText = "Gesamt: " + total; 
+        }
     }
 
     colorOn(event) {

@@ -12,11 +12,11 @@ class Presenter {
     }
 
     evaluate() {
-        var answersEl = document.querySelectorAll('#answers > button');
+        let answersEl = document.querySelectorAll('#answers > button');
         answersEl.forEach(button => {
             button.addEventListener("click", (event) => {
-                stat = m.evaluate(event);
-                v.evaluate(stat);
+                let success = m.evaluate(event);
+                v.displayEvaluation(success);
             })
         })      
     }
@@ -25,7 +25,7 @@ class Presenter {
         document.getElementById("restart").addEventListener("click", () => {
             console.log("Presenter -> restart");
             m.restart();
-            v.restart();
+            v.displayEvaluation(null);
         });
     }
 
