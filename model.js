@@ -19,6 +19,7 @@ class Model {
         btn.innerHTML = "Submit";
         btn.type = "submit";
         btn.name = "formBtn";
+        btn.id = "submitBtn";
 
         for (let i = 0; i < 4; i++) {
             categoriesEl[i].addEventListener("click", (event) => {
@@ -67,14 +68,12 @@ class Model {
             else {
                 success = false;
             }
+            return success;
         }
         else {
-            // this.loadAjax();
             this.getAnswers(event);
-
+            return;
         }
-        return success;
-        // }
     }
 
     // ##################### AJAX ##############################
@@ -121,17 +120,13 @@ class Model {
 
     getAnswers(event) {
         if (category == "ajax") {
-                let answer = parseInt(event.target.id);
-                answers.push(answer);
-                console.log("128: getAnswers() " + JSON.stringify(answers));
+            let answer = parseInt(event.target.id);
+            if (!answers.includes(answer)) answers.push(answer);
         }
     }
 
     checkAjax() {
-        // console.log(event.target.id);
-        // let answer = parseInt(event.target.id);
-        // answers.push(answer);
-        // console.log(JSON.stringify(answers));
+
         let xhr = getXhr();
         sendXhr(xhr);
 
@@ -149,8 +144,15 @@ class Model {
             }
             // console.log( "Status: " + xhr.readyState + " " + xhr.status);
             if (xhr.status == 200) {
-                let data = JSON.parse(xhr.responseText);
-                console.log(data);
+                let res = JSON.parse(xhr.responseText);
+                console.log(res);
+                v.displayEvaluation(res['success']);
+                // document.getElementById("question").innerHTML = res['feedback'];
+                if (res['success'] == true) {
+                    console.log("Model 151");
+                    setTimeout(m.loadAjax(),20000);
+                }
+                answers = [];
             } 
         }
         
@@ -161,15 +163,10 @@ class Model {
             xhr.setRequestHeader("Authorization", "Basic " + window.btoa("s81983@gmail.com:secret"));
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Accept", "application/json");
-            let dataToSend = "[2]";
-            // console.log(JSON.stringify(answers));
-            // xhr.send(dataToSend);
+            console.log(JSON.stringify(answers));
             xhr.send(JSON.stringify(answers));
             console.debug("Request send");
-            answers = [];
         }
-        // console.log("185" + xhr.responseText);
-        // return data;
     }
 
 }

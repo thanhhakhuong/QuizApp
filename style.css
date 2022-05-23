@@ -144,8 +144,10 @@ div#task {
     color: white;
 }
 
-/* STATISTIK */
-
+button#submitBtn:hover {
+    background-color: black;
+    color: white;
+}
 
 
 /* MEDIA QUERIES */

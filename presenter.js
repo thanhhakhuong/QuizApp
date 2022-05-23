@@ -15,15 +15,14 @@ class Presenter {
         let answersEl = document.querySelectorAll('#answers > button');
         answersEl.forEach(button => {
             button.addEventListener("click", (event) => {
-                let success = m.evaluate(event);
-                v.displayEvaluation(success);
+                success = m.evaluate(event);
+                if(success != undefined) v.displayEvaluation(success);
             })
         })      
     }
 
     restart() {
         document.getElementById("restart").addEventListener("click", () => {
-            console.log("Presenter -> restart");
             m.restart();
             v.displayEvaluation(null);
         });

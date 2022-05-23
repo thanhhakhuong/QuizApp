@@ -63,16 +63,21 @@ class View {
     }
 
     colorOn(event) {
+        let btn = document.getElementById("task").lastChild;
         if (event.target.nodeName.toLowerCase() === "button") {
-            if (event.target.id == "0") {
-                event.target.style.backgroundColor = "#C3EDBF";
-            } else event.target.style.backgroundColor = "#FF6961";
+            if (btn.innerText != "Submit") {
+                if (event.target.id == "0") {
+                    event.target.style.backgroundColor = "#C3EDBF";
+                } else event.target.style.backgroundColor = "#FF6961";
+            } else {
+                event.target.style.backgroundColor = "#C1C1C1";
+            }
         }
     }
 
     colorOff(event) {
         if (event.target.nodeName.toLowerCase() === "button") {
-            event.target.style.backgroundColor = "transparent";
+                event.target.style.backgroundColor = "transparent";
         }
     }
 }
