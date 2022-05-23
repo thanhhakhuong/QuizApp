@@ -5,6 +5,7 @@ let index = 0;
 let success = null;
 let message = "Herzlichen Glückwunsch, Sie haben alle Fragen in dieser Kategorie beantwortet!";
 let randomId;
+let answers = [];
 
 class Model {
 
@@ -31,7 +32,7 @@ class Model {
                 else {
                     taskEl.appendChild(btn);
                     this.loadAjax();
-                    // btn.addEventListener("click", () => this.checkAjax());
+                    btn.addEventListener("click", () => this.checkAjax());
                 }
             })
         };
@@ -49,7 +50,6 @@ class Model {
     evaluate(event) {
         // if (event.target.nodeName.toLowerCase() === "button") {
         if (category != 'ajax') {
-            console.log("62 " + category);
             if (event.target.id == "0") {
                 success = true;
                     if (index < myData[category].length - 1) {
@@ -69,12 +69,15 @@ class Model {
             }
         }
         else {
-            this.checkAjax();
             // this.loadAjax();
+            this.getAnswers(event);
+
         }
         return success;
         // }
     }
+
+    // ##################### AJAX ##############################
 
     loadAjax() {
 
@@ -116,7 +119,15 @@ class Model {
 
     }
 
-    checkAjax(event) {
+    getAnswers(event) {
+        if (category == "ajax") {
+                let answer = parseInt(event.target.id);
+                answers.push(answer);
+                console.log("128: getAnswers() " + JSON.stringify(answers));
+        }
+    }
+
+    checkAjax() {
         // console.log(event.target.id);
         // let answer = parseInt(event.target.id);
         // answers.push(answer);
@@ -132,11 +143,11 @@ class Model {
         }
 
         function xhrHandler() {
-            console.log( "Status: " + xhr.readyState );
+            // console.log( "Status: " + xhr.readyState );
             if (xhr.readyState != 4) { 
                 return; 
             }
-            console.log( "Status: " + xhr.readyState + " " + xhr.status);
+            // console.log( "Status: " + xhr.readyState + " " + xhr.status);
             if (xhr.status == 200) {
                 let data = JSON.parse(xhr.responseText);
                 console.log(data);
@@ -151,10 +162,11 @@ class Model {
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Accept", "application/json");
             let dataToSend = "[2]";
-            console.log(dataToSend);
-            xhr.send(dataToSend);
-            // xhr.send(JSON.stringify(answers));
+            // console.log(JSON.stringify(answers));
+            // xhr.send(dataToSend);
+            xhr.send(JSON.stringify(answers));
             console.debug("Request send");
+            answers = [];
         }
         // console.log("185" + xhr.responseText);
         // return data;
