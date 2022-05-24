@@ -32,6 +32,7 @@ class Model {
                 }
                 else {
                     taskEl.appendChild(btn);
+                    document.getElementById("progress").innerHTML = "";
                     this.loadAjax();
                     btn.addEventListener("click", () => this.checkAjax());
                 }
@@ -41,6 +42,10 @@ class Model {
     
     getTask() {
         let task = myData[category][index];
+        let total = myData[category].length;
+        let cur = index + 1;
+        console.log(cur + "/" + total);
+        v.displayProgress(cur, total);
         v.displayTask(task);
     }
 
@@ -147,7 +152,7 @@ class Model {
                 let res = JSON.parse(xhr.responseText);
                 console.log(res);
                 v.displayEvaluation(res['success']);
-                // document.getElementById("question").innerHTML = res['feedback'];
+                document.getElementById("progress").innerHTML = res['feedback'];
                 if (res['success'] == true) {
                     console.log("Model 151");
                     setTimeout(m.loadAjax(),20000);

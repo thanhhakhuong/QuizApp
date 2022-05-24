@@ -17,6 +17,11 @@ class View {
         })
     }
 
+    displayProgress(cur, total) {
+        let progressEl = document.getElementById("progress");
+        progressEl.innerHTML = cur + "/" + total;
+    }
+
     displayTask(task) {
         let questionEl = document.getElementById("question");
         let answersEl = document.querySelectorAll("#answers > button");

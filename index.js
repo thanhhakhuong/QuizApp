@@ -10,6 +10,8 @@ const myData = {
     ],
   "allgemein": [
     {"text":"Karl der Große, Geburtsjahr", "options":["747","828","650","1150"]},
+    {"text":"Wie heißt die Hauptstadt der Slowakei?", "options":["Bratislava","Sofia","Berlin","Prag"]},
+    {"text":"Wie viele Zähne hat ein erwachsener Mensch normalerweise?", "options":["32","30","26","36"]},
     ]
 }
 
