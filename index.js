@@ -17,7 +17,14 @@ const myData = {
     {"text":"Wie viele Zähne hat ein erwachsener Mensch normalerweise?", "options":["32","30","26","36"]},
     ]
 }
-
+const email = "s81983@gmail.com";
+const password = "secret";
+let category = "allgemein";
+let index = 0;
+let success = null;
+let message = "Herzlichen Glückwunsch, Sie haben alle Fragen in dieser Kategorie beantwortet!";
+let randomId;
+let answers = [];
 let p, v, m;
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -39,7 +46,6 @@ class Presenter {
     }
 
     start() {
-        console.log("Presenter -> start");
         v.setHandler();
         m.getCategory();
         m.getTask();
@@ -66,14 +72,6 @@ class Presenter {
 
 // ############### MODEL ###############
 
-const email = "s81983@gmail.com";
-const password = "secret";
-let category = "allgemein";
-let index = 0;
-let success = null;
-let message = "Herzlichen Glückwunsch, Sie haben alle Fragen in dieser Kategorie beantwortet!";
-let randomId;
-let answers = [];
 
 class Model {
 
@@ -112,7 +110,6 @@ class Model {
         let task = myData[category][index];
         let total = myData[category].length;
         let cur = index + 1;
-        console.log(cur + "/" + total);
         v.displayProgress(cur, total);
         v.displayTask(task);
     }
@@ -222,7 +219,6 @@ class Model {
                 v.displayEvaluation(res['success']);
                 document.getElementById("progress").innerHTML = res['feedback'];
                 if (res['success'] == true) {
-                    console.log("Model 151");
                     setTimeout(m.loadAjax(),20000);
                 }
                 answers = [];
@@ -236,7 +232,6 @@ class Model {
             xhr.setRequestHeader("Authorization", "Basic " + window.btoa("s81983@gmail.com:secret"));
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Accept", "application/json");
-            console.log(JSON.stringify(answers));
             xhr.send(JSON.stringify(answers));
             console.debug("Request send");
         }
