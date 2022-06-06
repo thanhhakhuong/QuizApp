@@ -72,7 +72,6 @@ class Presenter {
 
 // ############### MODEL ###############
 
-
 class Model {
 
     getCategory() {

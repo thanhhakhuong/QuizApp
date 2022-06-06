@@ -61,7 +61,7 @@
     <script>
     // Service Worker registrieren für PWA
 		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.register('/sw.js')
+			navigator.serviceWorker.register('/serviceWorker.js')
 				.then(reg => console.log(reg))
 				.catch(err => console.log(err));
 		}

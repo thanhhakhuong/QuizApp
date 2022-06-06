@@ -1,0 +1,27 @@
+1. Entwicklungsschritte
+    - Erstellung des HTML-Gerüstes mit allen Elementen
+    - Nutzung von CSS zur Gestaltung + Responsive Design
+    - Erstellung der Javascript-Programmstruktur (Architektur Model-View-Presenter)
+    - Anfangsaufgaben anzeigen
+    - Kategorie erhalten und Aufgabe anzeigen
+    - Erweiterung der Anzeige auf andere Aufgabentypen (Mathe -> Katex)
+    - Implementierung der Button-Handler, welche die Antworten auswerten
+    - Implementierung der Statistikfunktionalität
+    - Anzeigen des Fortschritts
+    - Erweiterung des Models um die Nutzung der angebotenen REST-Schnittstelle
+        - Aufgaben von der Web-Quiz-API holen
+        - Antworten auf Web-Quiz-API posten
+    - (Versuch) PWA
+    - Zu HTW Server hochladen
+
+2. Lernfortschritt
+    - Einsatz von HTML zur Strukturierung
+    - Einsatz von CSS zur Formatierung
+        - Implementierung eines responsive Designs
+        - Entwurf und Implementierung eines sinnvollen Nutzerinterfaces
+    - Webprogrammierung mittels Javascript
+    - dynamisches Nachladen von Inhalten mittels Ajax-Technik
+    - Nutzung einer REST-Schnittstelle
+
+3. Misserfolge
+    - Technik einer PWA 
