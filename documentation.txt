@@ -1,0 +1,33 @@
+Dokumentation
+
+Dateien: index.html, style.css, index.js, manifest.json, serviceWorker.js
+
+index.html
+- erstellt Sie die Struktur für die Seite
+- besteht aus: 
+    - Kopfzeile
+    - Seitenleiste zur Anzeige von Kategorien
+    - Hauptteil mit Fragen und Antworten 
+    - Seitenleiste zur Anzeige von Statistiken
+
+style.css
+- verantwortlich für das Styling der Elemente
+- enthält eine media query für responsives Webdesign
+
+index.js
+- verantwortlich für die Funktionalität des Programms
+- implementieren in Bezug auf Model View Presenter
+- enthält Daten für lokale Aufgaben
+- Hauptfunktionalitäten: 
+    - Auswahl aus verschiedenen Kategorien
+    - Aufgaben abrufen (lokal, durch Restanfrage an Web Quiz)
+    - Aufgaben anzeigen
+    - Fortschritt anzeigen
+    - Antworten auswerten (lokal, durch Restanfrage an Web Quiz)
+    - Statistiken anzeigen
+
+serviceWorker.js
+- speichert den Cache und erlaubt die Offline-Nutzung
+
+manifest.json
+- enthält wichtige Attribute zum Erstellen einer progressiven Web-App
